@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 import 'package:flutter_app/view/global/utils/widget_utils.dart';
+
 class SimpleInterestFormUi extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -60,8 +61,13 @@ class _SICalculator extends State<StatefulWidget> {
                   Padding(
                       padding: EdgeInsets.only(
                           top: _padding_10, bottom: _padding_10),
-                      child: TextField(
+                      child: TextFormField(
                         keyboardType: TextInputType.number,
+                        validator: (String value) {
+                          if (value.isEmpty) {
+                            return 'please enter rate of interest';
+                          }
+                        },
                         controller: roiController,
                         style: TextStyle(
                             fontFamily: "GreatVibes",
@@ -76,8 +82,13 @@ class _SICalculator extends State<StatefulWidget> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: TextField(
+                        child: TextFormField(
                           keyboardType: TextInputType.number,
+                          validator: (String value) {
+                            if (value.isEmpty) {
+                              return 'please enter term';
+                            }
+                          },
                           controller: termController,
                           style: TextStyle(
                               height: 0.5,
