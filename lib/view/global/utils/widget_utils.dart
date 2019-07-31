@@ -75,6 +75,18 @@ Text textViewColor(String message, Color textColor) {
           fontWeight: FontWeight.w300));
 }
 
+// show text view
+Text textViewBlackColor(String message) {
+  return Text(message,
+      textDirection: TextDirection.ltr,
+      style: TextStyle(
+          fontSize: 30,
+          color: Colors.black,
+          decoration: TextDecoration.none,
+          fontFamily: "GreatVibes",
+          fontWeight: FontWeight.w300));
+}
+
 // show floating button
 getFloatButton(Icon icon) {
   return FloatingActionButton(
@@ -84,4 +96,26 @@ getFloatButton(Icon icon) {
     tooltip: "click fab button",
     child: icon,
   );
+}
+
+getDecorationStyle(String labelText, String hintText) {
+  return InputDecoration(
+      labelText: labelText,
+      //"principal",
+      hintText: hintText,
+      //"enter principal e.g. 1200",
+      labelStyle: TextStyle(
+        color: Colors.black,
+        fontSize: 18,
+      ),
+      errorStyle: TextStyle(
+        color: Colors.red,
+        fontSize: 15,
+      ),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(3.3)));
+}
+textStyle() {
+  return TextStyle(
+      fontFamily: "GreatVibes", fontSize: 25, fontWeight: FontWeight.w300,
+    color: Colors.black,);
 }

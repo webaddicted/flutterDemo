@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 import 'package:flutter_app/view/global/utils/widget_utils.dart';
-
+import 'package:flutter_app/view/global/utils/validation_helper.dart';
 class SimpleInterestFormUi extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -40,66 +40,52 @@ class _SICalculator extends State<StatefulWidget> {
                   Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: TextFormField(
-                      keyboardType: TextInputType.number,
-                      validator: (String value) {
-                        if (value.isEmpty) {
-                          return 'please enter principal amount';
-                        }
-                      },
-                      style: TextStyle(
-                          fontFamily: "GreatVibes",
-                          fontSize: 20,
-                          fontWeight: FontWeight.w300),
-                      controller: principleController,
-                      decoration: InputDecoration(
-                          labelText: "principal",
-                          hintText: "enter principal e.g. 1200",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(3.3))),
-                    ),
+                        keyboardType: TextInputType.number,
+                        controller: principleController,
+                        style: textStyle(),
+                        maxLength: 10,
+                        maxLines: 1,
+                        validator: (String value) {
+                          return mobileValidate(value);
+//                          if (value.isEmpty) {
+//                            return 'please enter principal amount';
+//                          }
+                        },
+                        decoration: getDecorationStyle("principal", "enter principal e.g. 1200")),
                   ),
                   Padding(
                       padding: EdgeInsets.only(
                           top: _padding_10, bottom: _padding_10),
                       child: TextFormField(
                         keyboardType: TextInputType.number,
-                        validator: (String value) {
-                          if (value.isEmpty) {
-                            return 'please enter rate of interest';
-                          }
-                        },
                         controller: roiController,
-                        style: TextStyle(
-                            fontFamily: "GreatVibes",
-                            fontSize: 20,
-                            fontWeight: FontWeight.w300),
-                        decoration: InputDecoration(
-                            labelText: "rate of interest",
-                            hintText: "enter rate of interest e.g. 12",
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(3.3))),
+                        style: textStyle(),
+                        maxLength: 10,
+                        maxLines: 1,
+                        validator: (String value) {
+                          return fullNameValidate(value);
+//                          if (value.isEmpty) {
+//                            return 'please enter rate of interest';
+//                          }
+                        },
+                        decoration: getDecorationStyle("rate of interest", "enter rate of interest e.g. 12"),
                       )),
                   Row(
                     children: <Widget>[
                       Expanded(
                         child: TextFormField(
                           keyboardType: TextInputType.number,
+                          controller: termController,
+                          style: textStyle(),
+                          maxLength: 10,
+                          maxLines: 1,
                           validator: (String value) {
                             if (value.isEmpty) {
                               return 'please enter term';
                             }
                           },
-                          controller: termController,
-                          style: TextStyle(
-                              height: 0.5,
-                              fontFamily: "GreatVibes",
-                              fontSize: 20,
-                              fontWeight: FontWeight.w300),
-                          decoration: InputDecoration(
-                              labelText: "terms",
-                              hintText: "terms",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(3.3))),
+
+                          decoration: getDecorationStyle("terms", "terms"),
                         ),
                       ),
                       Expanded(
@@ -153,8 +139,8 @@ class _SICalculator extends State<StatefulWidget> {
                             top: _padding_10),
                         child: RaisedButton(
                           color: Colors.yellow,
-                          child: textViewColor("reset", Colors.black),
-                          elevation: 5,
+                          child: textViewBlackColor("reset"),
+                          elevation: 2,
                           onPressed: () {
                             setState(() {
                               resetCalculator();
@@ -168,14 +154,7 @@ class _SICalculator extends State<StatefulWidget> {
                       alignment: Alignment.center,
                       child: Padding(
                         padding: EdgeInsets.only(top: _padding_10),
-                        child: Text(_displayResult,
-                            textDirection: TextDirection.ltr,
-                            style: TextStyle(
-                                fontSize: 30,
-                                color: Colors.black,
-                                decoration: TextDecoration.none,
-                                fontFamily: "GreatVibes",
-                                fontWeight: FontWeight.w300)),
+                        child: textViewBlackColor(_displayResult),
                       ))
                 ],
               ),
@@ -213,4 +192,6 @@ class _SICalculator extends State<StatefulWidget> {
       child: imageLogo,
     );
   }
+
+
 }
