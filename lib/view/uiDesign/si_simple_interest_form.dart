@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 import 'package:flutter_app/view/global/utils/widget_utils.dart';
 import 'package:flutter_app/view/global/utils/validation_helper.dart';
+
 class SimpleInterestFormUi extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -46,12 +47,10 @@ class _SICalculator extends State<StatefulWidget> {
                         maxLength: 10,
                         maxLines: 1,
                         validator: (String value) {
-                          return mobileValidate(value);
-//                          if (value.isEmpty) {
-//                            return 'please enter principal amount';
-//                          }
+                          return isEmpty(value, "principle can not blank");
                         },
-                        decoration: getDecorationStyle("principal", "enter principal e.g. 1200")),
+                        decoration: getDecorationStyle(
+                            "principal", "enter principal e.g. 1200")),
                   ),
                   Padding(
                       padding: EdgeInsets.only(
@@ -63,12 +62,11 @@ class _SICalculator extends State<StatefulWidget> {
                         maxLength: 10,
                         maxLines: 1,
                         validator: (String value) {
-                          return fullNameValidate(value);
-//                          if (value.isEmpty) {
-//                            return 'please enter rate of interest';
-//                          }
+                            return validateMobile(value);
                         },
-                        decoration: getDecorationStyle("rate of interest", "enter rate of interest e.g. 12"),
+
+                        decoration: getDecorationStyle("rate of interest",
+                            "enter rate of interest e.g. 12"),
                       )),
                   Row(
                     children: <Widget>[
@@ -84,7 +82,6 @@ class _SICalculator extends State<StatefulWidget> {
                               return 'please enter term';
                             }
                           },
-
                           decoration: getDecorationStyle("terms", "terms"),
                         ),
                       ),
@@ -192,6 +189,4 @@ class _SICalculator extends State<StatefulWidget> {
       child: imageLogo,
     );
   }
-
-
 }

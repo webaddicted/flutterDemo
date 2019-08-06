@@ -45,3 +45,18 @@ String validateEmail(String value) {
   // The pattern of the email didn't match the regex above.
   return 'enter valid emailid';
 }
+
+String isEmpty(String value, String message) {
+  if (value.isEmpty) return message;
+}
+
+String validateMobile(String value) {
+  String patttern = r'(^(?:[+0]9)?[0-9]$)';
+  RegExp regExp = new RegExp(patttern);
+  if (value.length == 0) {
+    return 'Please enter mobile number';
+  } else if (!regExp.hasMatch(value)) {
+    return 'Please enter valid mobile number';
+  }
+  return null;
+}
