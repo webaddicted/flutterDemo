@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Splash Screen-->
+    <color name="bg_screen1">#f64c73</color>
+    <color name="bg_screen2">#20d2bb</color>
+    <color name="bg_screen3">#3395ff</color>
+    <color name="bg_screen4">#c873f4</color>
+    <!-- dots inactive colors -->
+    <color name="dot_inactive">#4c4c4c</color>
+    <!-- dots active colors -->
+    <color name="dot_active">#e5e5e5</color>
+
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="gray">#BEBEBE</color>
+    <color name="green">#00de4a</color>
+    <color name="brown">#bdbdbe</color>
+    <color name="brown_light">#2CBDBDBE</color>
+
+    <color name="red">#ff090b</color>
+    <color name="transprant">#00000000</color>
+    <color name="grey">#DDDDDD</color>
+    <color name="light_grey">#EEEEEE</color>
+    <color name="white_transparent">#99FFFFFF</color>
+</resources>
