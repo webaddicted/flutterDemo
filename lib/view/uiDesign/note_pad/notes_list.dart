@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 import 'package:flutter_app/view/global/utils/widget_utils.dart';
+import 'package:flutter_app/view/uiDesign/note_pad/notes_list.dart';
+
 import 'package:flutter_app/view/global/utils/validation_helper.dart';
+
+import 'add_notes.dart';
 
 class NoteLists extends StatefulWidget {
   @override
@@ -19,7 +23,14 @@ class NoteListsState extends State<NoteLists> {
     return Scaffold(
       appBar: getAppBar("notes list", Colors.teal),
       body: getNotesList(),
-      floatingActionButton: getFloatButton(Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigationPush(context, AddNotes("add notes"));
+          logDubug("floatbutton click");
+        },
+        tooltip: "click fab button",
+        child: Icon(Icons.add),
+      ),
     );
   }
 
@@ -35,10 +46,12 @@ class NoteListsState extends State<NoteLists> {
                 backgroundColor: Colors.yellow,
                 child: Icon(Icons.keyboard_arrow_right),
               ),
-              title: textViewColor("Dummy Text", Colors.black),
-              subtitle: textViewColor("Dummy Text", Colors.black),
+              title: textViewBlackColor("Dummy Text"),
+              subtitle: textViewBlackColor("Dummy Sub Text"),
               trailing: Icon(Icons.delete, color: Colors.grey),
-              onTap: () {},
+              onTap: () {
+                navigationPush(context, AddNotes("update notes"));
+              },
             ),
           );
         });
