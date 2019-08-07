@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/global/db/validation_helper.dart';
+import 'package:flutter_app/global/db/widget_utils.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
-import 'package:flutter_app/view/global/utils/widget_utils.dart';
-import 'package:flutter_app/view/global/utils/validation_helper.dart';
+//import 'package:flutter_app/view/global/utils/widget_utils.dart';
+//import 'package:flutter_app/view/global/utils/validation_helper.dart';
 import 'notes_list.dart';
 
 class AddNotes extends StatefulWidget {
@@ -52,7 +54,7 @@ class AddNotesState extends State<AddNotes> {
           ),
         ),
         body: getFields() //getDropDown() //()getFields()
-        );
+    );
   }
 
   getDropDown() {
@@ -60,9 +62,9 @@ class AddNotesState extends State<AddNotes> {
       child: DropdownButton(
         items: _dropdownValues
             .map((value) => DropdownMenuItem<String>(
-                  child: Text(value),
-                  value: value,
-                ))
+          child: Text(value),
+          value: value,
+        ))
             .toList(),
         onChanged: (String dropDown) {
           setState(() {});
@@ -89,9 +91,9 @@ class AddNotesState extends State<AddNotes> {
                 child: DropdownButton(
                   items: _dropdownValues
                       .map((value) => DropdownMenuItem<String>(
-                            child: Text(value),
-                            value: value,
-                          ))
+                    child: Text(value),
+                    value: value,
+                  ))
                       .toList(),
                   value: prioritySelected,
                   onChanged: (String dropDown) {
@@ -118,7 +120,7 @@ class AddNotesState extends State<AddNotes> {
               ),
               Padding(
                   padding:
-                      EdgeInsets.only(top: _padding_10, bottom: _padding_10),
+                  EdgeInsets.only(top: _padding_10, bottom: _padding_10),
                   child: TextFormField(
                     keyboardType: TextInputType.text,
                     controller: descripController,
@@ -131,7 +133,7 @@ class AddNotesState extends State<AddNotes> {
 //                          }
                     },
                     decoration:
-                        getDecorationStyle("Description", "enter description"),
+                    getDecorationStyle("Description", "enter description"),
                   )),
               Row(
                 children: <Widget>[
@@ -157,21 +159,21 @@ class AddNotesState extends State<AddNotes> {
                   ),
                   Expanded(
                       child: Padding(
-                    padding: EdgeInsets.only(
-                        left: _padding_10,
-                        right: _padding_10,
-                        top: _padding_10),
-                    child: RaisedButton(
-                      color: Colors.yellow,
-                      child: textViewBlackColor("delete"),
-                      elevation: 2,
-                      onPressed: () {
-                        setState(() {
-                          debugPrint(_displayResult);
-                        });
-                      },
-                    ),
-                  ))
+                        padding: EdgeInsets.only(
+                            left: _padding_10,
+                            right: _padding_10,
+                            top: _padding_10),
+                        child: RaisedButton(
+                          color: Colors.yellow,
+                          child: textViewBlackColor("delete"),
+                          elevation: 2,
+                          onPressed: () {
+                            setState(() {
+                              debugPrint(_displayResult);
+                            });
+                          },
+                        ),
+                      ))
                 ],
               ),
               Container(

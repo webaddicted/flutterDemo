@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
-import 'package:flutter_app/view/global/utils/widget_utils.dart';
+import 'package:flutter_app/global/db/widget_utils.dart';
 class SimpleInterestUi extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {

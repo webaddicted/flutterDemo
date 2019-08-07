@@ -30,15 +30,14 @@ void alertDialog(BuildContext context) {
 void showSnackBar(BuildContext context, String message) {
   var snackbar = SnackBar(
     content: textViewColor(message, Colors.deepOrange),
-    action: SnackBarAction(
-        label: "Undo",
-        onPressed: () {
-          logDubug(message + " undo");
-        }),
+//    action: SnackBarAction(
+//        label: "Undo",
+//        onPressed: () {
+//          logDubug(message + " undo");
+//        }),
   );
   Scaffold.of(context).showSnackBar(snackbar);
 }
-
 // show button
 getRiseButton(BuildContext context, String btnText) {
   return RaisedButton(
