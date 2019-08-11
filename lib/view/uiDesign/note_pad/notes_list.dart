@@ -95,7 +95,7 @@ class NoteListsState extends State<NoteLists> {
   void deleteNote(BuildContext context, Note note) async {
     int result = await _dbHHelper.deleteNote(note.id);
     if (result != 0) showSnackBar(context, 'note delete successfully');
-  updateListView();
+    updateListView();
   }
 
   void updateListView() {
