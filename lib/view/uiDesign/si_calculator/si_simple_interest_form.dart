@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
+
 import 'package:flutter_app/global/db/widget_utils.dart';
 import 'package:flutter_app/global/db/validation_helper.dart';
 class SimpleInterestFormUi extends StatefulWidget {
@@ -12,9 +13,10 @@ class SimpleInterestFormUi extends StatefulWidget {
 class _SICalculator extends State<StatefulWidget> {
   var _formKey = GlobalKey<FormState>();
   var _currencyList = ["rupee", "dollars", "pounds"];
+  String _currencySelected = '';
   var _padding_10 = 10.0;
   var _displayResult = "";
-  String _currencySelected = '';
+
   TextEditingController principleController = TextEditingController();
   TextEditingController roiController = TextEditingController();
   TextEditingController termController = TextEditingController();
@@ -40,18 +42,16 @@ class _SICalculator extends State<StatefulWidget> {
                   Padding(
                     padding: EdgeInsets.only(top: 30),
                     child: TextFormField(
-                        keyboardType: TextInputType.number,
-                        controller: principleController,
-                        style: textStyle(),
-                        maxLength: 10,
-                        maxLines: 1,
-                        validator: (String value) {
-                          return mobileValidate(value);
-//                          if (value.isEmpty) {
-//                            return 'please enter principal amount';
-//                          }
-                        },
-                        decoration: getDecorationStyle("principal", "enter principal e.g. 1200")),
+                      controller: principleController,
+                      style: textStyle(),
+                      maxLength: 10,
+                      validator: (String value) {
+                        return isEmpty(value, "principle can not blank");
+                      },
+                      decoration: getDecorationStyle(
+                          "principal", "enter principal e.g. 1200"),
+                      keyboardType: TextInputType.number,
+                    ),
                   ),
                   Padding(
                       padding: EdgeInsets.only(
@@ -63,12 +63,10 @@ class _SICalculator extends State<StatefulWidget> {
                         maxLength: 10,
                         maxLines: 1,
                         validator: (String value) {
-                          return fullNameValidate(value);
-//                          if (value.isEmpty) {
-//                            return 'please enter rate of interest';
-//                          }
+                          return isEmpty(value,"rate of interest can not blank");
                         },
-                        decoration: getDecorationStyle("rate of interest", "enter rate of interest e.g. 12"),
+                        decoration: getDecorationStyle("rate of interest",
+                            "enter rate of interest e.g. 12"),
                       )),
                   Row(
                     children: <Widget>[
@@ -80,11 +78,8 @@ class _SICalculator extends State<StatefulWidget> {
                           maxLength: 10,
                           maxLines: 1,
                           validator: (String value) {
-                            if (value.isEmpty) {
-                              return 'please enter term';
-                            }
+                            return isEmpty(value,"terms can not blank");
                           },
-
                           decoration: getDecorationStyle("terms", "terms"),
                         ),
                       ),
@@ -183,8 +178,8 @@ class _SICalculator extends State<StatefulWidget> {
     AssetImage assetImage = AssetImage("images/logo.png");
     Image imageLogo = Image(
       image: assetImage,
-      width: 150,
-      height: 150,
+      width: 120,
+      height: 120,
     );
     return Container(
       alignment: Alignment.topCenter,
@@ -192,6 +187,4 @@ class _SICalculator extends State<StatefulWidget> {
       child: imageLogo,
     );
   }
-
-
 }

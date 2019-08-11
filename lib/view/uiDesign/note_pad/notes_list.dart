@@ -4,7 +4,10 @@ import 'package:flutter_app/model/note/note_dean.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 import 'package:flutter_app/global/db/widget_utils.dart';
 import 'package:flutter_app/global/db/widget_utils.dart';
+import 'package:flutter_app/view/uiDesign/note_pad/notes_list.dart';
 import 'package:sqflite/sqlite_api.dart';
+
+import 'add_notes.dart';
 
 class NoteLists extends StatefulWidget {
   @override
@@ -28,7 +31,14 @@ class NoteListsState extends State<NoteLists> {
     return Scaffold(
       appBar: getAppBar("notes list", Colors.teal),
       body: getNotesList(),
-      floatingActionButton: getFloatButton(Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          navigationPush(context, AddNotes("add notes"));
+          logDubug("floatbutton click");
+        },
+        tooltip: "click fab button",
+        child: Icon(Icons.add),
+      ),
     );
   }
 
@@ -54,7 +64,7 @@ class NoteListsState extends State<NoteLists> {
                   deleteNote(context, noteList[position]);
                 },
               ),
-              onTap: () {},
+              onTap: () {navigationPush(context, AddNotes("update notes"));},
             ),
           );
         });

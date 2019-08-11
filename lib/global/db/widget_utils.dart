@@ -113,8 +113,24 @@ getDecorationStyle(String labelText, String hintText) {
       ),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(3.3)));
 }
+
 textStyle() {
   return TextStyle(
-      fontFamily: "GreatVibes", fontSize: 25, fontWeight: FontWeight.w300,
-    color: Colors.black,);
+    fontFamily: "GreatVibes",
+    fontSize: 25,
+    fontWeight: FontWeight.w300,
+    color: Colors.black,
+  );
+}
+
+void navigationPush(BuildContext context, StatefulWidget route) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return route;
+  }));
+}
+
+void navigationPop(BuildContext context, StatefulWidget route) {
+  Navigator.pop(context, MaterialPageRoute(builder: (context) {
+    return route;
+  }));
 }
