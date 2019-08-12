@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/global/db/widget_utils.dart';
+import 'package:flutter_app/global/utils/widget_utils.dart';
 
 class MaterialWidget extends StatelessWidget {
   @override

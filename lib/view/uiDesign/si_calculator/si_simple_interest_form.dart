@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 
-import 'package:flutter_app/global/db/widget_utils.dart';
+import 'package:flutter_app/global/utils/widget_utils.dart';
 import 'package:flutter_app/global/utils/validation_helper.dart';
 class SimpleInterestFormUi extends StatefulWidget {
   @override

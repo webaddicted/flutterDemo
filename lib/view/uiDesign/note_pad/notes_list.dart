@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/global/db/db_helper.dart';
 import 'package:flutter_app/model/note/note_dean.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
-import 'package:flutter_app/global/db/widget_utils.dart';
-import 'package:flutter_app/global/db/widget_utils.dart';
+import 'package:flutter_app/global/utils/widget_utils.dart';
+import 'package:flutter_app/global/utils/widget_utils.dart';
 import 'package:flutter_app/view/uiDesign/note_pad/notes_list.dart';
 import 'package:sqflite/sqlite_api.dart';
 
@@ -27,13 +27,14 @@ class NoteListsState extends State<NoteLists> {
     if (noteList == null) {
       noteList = List<Note>();
       updateListView();
+      debugPrint('note list  test-> ');
     }
     return Scaffold(
       appBar: getAppBar("notes list", Colors.teal),
       body: getNotesList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigationPush(context, AddNotes("add notes"));
+          navigationPush(context, AddNotes("add notes",null));
           logDubug("floatbutton click");
         },
         tooltip: "click fab button",
@@ -64,7 +65,7 @@ class NoteListsState extends State<NoteLists> {
                   deleteNote(context, noteList[position]);
                 },
               ),
-              onTap: () {navigationPush(context, AddNotes("update notes"));},
+              onTap: () {navigationPush(context, AddNotes("update notes",noteList[position]));},
             ),
           );
         });
@@ -112,10 +113,12 @@ class NoteListsState extends State<NoteLists> {
     Future<Database> dbFuture = _dbHHelper.initializeDb();
     dbFuture.then((database) {
       Future<List<Note>> noteListFuture = _dbHHelper.getNoteList();
+      debugPrint('note list  future -> ${noteListFuture.toString()}');
       noteListFuture.then((noteList) {
         setState(() {
           this.noteList = noteList;
           this.count = noteList.length;
+          debugPrint('note list   list   me  -> ${noteList.length}');
         });
       });
     });

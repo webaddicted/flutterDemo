@@ -30,7 +30,7 @@ class DbHelper {
   Future<Database> initializeDb() async {
     Directory directory = await getApplicationDocumentsDirectory();
     String path = directory.path + 'notes.db';
-    var noteDb = await openDatabase(path, version: 1, onCreate: _createDb);
+    var noteDb = await openDatabase(path, version: 2, onCreate: _createDb);
     return noteDb;
   }
 

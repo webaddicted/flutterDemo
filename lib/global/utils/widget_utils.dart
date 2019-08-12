@@ -18,10 +18,19 @@ AppBar getAppBar(String title, Color bgColor) {
 void logDubug(String s) => debugPrint(s);
 
 //  alert dialog
-void alertDialog(BuildContext context) {
+//void alertDialog(BuildContext context) {
+//  var alertDialog = AlertDialog(
+//    title: textViewColor("title", Colors.deepOrange),
+//    content: textViewColor("custom message", Colors.deepOrange),
+//  );
+//  showDialog(context: context, builder: (BuildContext context) => alertDialog);
+//}
+
+//  alert dialog
+void alertMessageDialog(BuildContext context, String titles,String description) {
   var alertDialog = AlertDialog(
-    title: textViewColor("title", Colors.deepOrange),
-    content: textViewColor("custom message", Colors.deepOrange),
+    title: textViewColor(titles, Colors.deepOrange),
+    content: textViewColor(description, Colors.deepOrange),
   );
   showDialog(context: context, builder: (BuildContext context) => alertDialog);
 }
@@ -44,7 +53,7 @@ getRiseButton(BuildContext context, String btnText) {
     color: Colors.deepOrange,
     child: textViewColor(btnText, Colors.white),
     elevation: 5,
-    onPressed: () => alertDialog(context),
+    onPressed: () => alertMessageDialog(context,'title','custom message '),
   );
 }
 
