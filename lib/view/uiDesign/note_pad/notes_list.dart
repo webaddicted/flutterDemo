@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/global/db/db_helper.dart';
 import 'package:flutter_app/model/note/note_dean.dart';
+import 'package:flutter_app/view/allWidgets/all_list.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 import 'package:flutter_app/global/utils/widget_utils.dart';
 import 'package:flutter_app/global/utils/widget_utils.dart';
@@ -30,11 +31,22 @@ class NoteListsState extends State<NoteLists> {
       debugPrint('note list  test-> ');
     }
     return Scaffold(
-      appBar: getAppBar("notes list", Colors.teal),
+      appBar: AppBar(
+        title: textViewWhiteColor('notes list'),
+        backgroundColor: Colors.green,
+        leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              navigationPop(context, AllLists());
+            }),
+      ),
       body: getNotesList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          navigationPush(context, AddNotes("add notes",null));
+          navigationPush(context, AddNotes("add notes", null));
           logDubug("floatbutton click");
         },
         tooltip: "click fab button",
@@ -44,7 +56,7 @@ class NoteListsState extends State<NoteLists> {
   }
 
   getNotesList() {
-    ListView.builder(
+    return ListView.builder(
         itemCount: count,
         itemBuilder: (BuildContext context, int position) {
           return Card(
@@ -65,7 +77,10 @@ class NoteListsState extends State<NoteLists> {
                   deleteNote(context, noteList[position]);
                 },
               ),
-              onTap: () {navigationPush(context, AddNotes("update notes",noteList[position]));},
+              onTap: () {
+                navigationPush(
+                    context, AddNotes("update notes", noteList[position]));
+              },
             ),
           );
         });
@@ -110,7 +125,7 @@ class NoteListsState extends State<NoteLists> {
   }
 
   void updateListView() {
-    Future<Database> dbFuture = _dbHHelper.initializeDb();
+    Future<Database> dbFuture = _dbHHelper.database;
     dbFuture.then((database) {
       Future<List<Note>> noteListFuture = _dbHHelper.getNoteList();
       debugPrint('note list  future -> ${noteListFuture.toString()}');

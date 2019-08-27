@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/view/allWidgets/all_list.dart';
 import 'package:flutter_app/view/widget/widget_screen.dart';
 
 import 'package:flutter_app/global/utils/widget_utils.dart';
 import 'package:flutter_app/global/utils/validation_helper.dart';
+
 class SimpleInterestFormUi extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -31,7 +33,14 @@ class _SICalculator extends State<StatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
 //      resizeToAvoidBottomPadding: false,
-        appBar: getAppBar("SI Calculator", Colors.amberAccent),
+        appBar: AppBar(
+          title: textViewWhiteColor("SI Calculator"),
+          backgroundColor: Colors.orange,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () {navigationPop(context, AllLists());}),
+        ),
         body: Form(
             key: _formKey,
             child: Padding(
@@ -63,7 +72,8 @@ class _SICalculator extends State<StatefulWidget> {
                         maxLength: 10,
                         maxLines: 1,
                         validator: (String value) {
-                          return isEmpty(value,"rate of interest can not blank");
+                          return isEmpty(
+                              value, "rate of interest can not blank");
                         },
                         decoration: getDecorationStyle("rate of interest",
                             "enter rate of interest e.g. 12"),
@@ -78,7 +88,7 @@ class _SICalculator extends State<StatefulWidget> {
                           maxLength: 10,
                           maxLines: 1,
                           validator: (String value) {
-                            return isEmpty(value,"terms can not blank");
+                            return isEmpty(value, "terms can not blank");
                           },
                           decoration: getDecorationStyle("terms", "terms"),
                         ),

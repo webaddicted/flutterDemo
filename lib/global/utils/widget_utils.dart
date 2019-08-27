@@ -76,7 +76,7 @@ Text textViewColor(String message, Color textColor) {
   return Text(message,
       textDirection: TextDirection.ltr,
       style: TextStyle(
-          fontSize: 30,
+          fontSize: 25,
           color: textColor,
           decoration: TextDecoration.none,
           fontFamily: "GreatVibes",
@@ -88,13 +88,23 @@ Text textViewBlackColor(String message) {
   return Text(message,
       textDirection: TextDirection.ltr,
       style: TextStyle(
-          fontSize: 30,
+          fontSize: 25,
           color: Colors.black,
           decoration: TextDecoration.none,
           fontFamily: "GreatVibes",
           fontWeight: FontWeight.w300));
 }
-
+// show text view
+Text textViewWhiteColor(String message) {
+  return Text(message,
+      textDirection: TextDirection.ltr,
+      style: TextStyle(
+          fontSize: 25,
+          color: Colors.white,
+          decoration: TextDecoration.none,
+          fontFamily: "GreatVibes",
+          fontWeight: FontWeight.w300));
+}
 // show floating button
 getFloatButton(Icon icon) {
   return FloatingActionButton(
@@ -139,6 +149,17 @@ void navigationPush(BuildContext context, StatefulWidget route) {
 }
 
 void navigationPop(BuildContext context, StatefulWidget route) {
+  Navigator.pop(context, MaterialPageRoute(builder: (context) {
+    return route;
+  }));
+}
+void navigationStateLessPush(BuildContext context, StatelessWidget route) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) {
+    return route;
+  }));
+}
+
+void navigationStateLessPop(BuildContext context, StatelessWidget route) {
   Navigator.pop(context, MaterialPageRoute(builder: (context) {
     return route;
   }));

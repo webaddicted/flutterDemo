@@ -41,6 +41,7 @@ class AddNotesState extends State<AddNotes> {
   @override
   void initState() {
     super.initState();
+    dbHelper.initializeDb();
     if (_noteBean == null) {
       _noteBean = new Note.blank();
       _noteBean.priority = 1;
@@ -58,7 +59,7 @@ class AddNotesState extends State<AddNotes> {
         appBar: AppBar(
           backgroundColor: Colors.teal,
           elevation: 3,
-          title: textViewColor(_screenTitle, Colors.white),
+          title: textViewWhiteColor(_screenTitle),
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back,
@@ -218,7 +219,7 @@ class AddNotesState extends State<AddNotes> {
       // update case
       await dbHelper.updateNote(_noteBean);
       alertMessageDialog(
-          context, "congratulation", 'note successfully updated !!!');
+          context, "congratulation", '\nnote successfully updated !!!');
     } else {
       // insert case
       await dbHelper.insertNote(_noteBean);

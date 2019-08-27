@@ -4,11 +4,12 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_app/model/note/note_dean.dart';
+import 'package:path/path.dart';
 
 class DbHelper {
   static DbHelper _dbHelper;
   static Database _database;
-  String noteTable = 'note_table';
+  String noteTable = 'NoteTable';
   String colId = 'id';
   String colTitle = 'title';
   String colDescription = 'description';
@@ -28,21 +29,32 @@ class DbHelper {
   }
 
   Future<Database> initializeDb() async {
-    Directory directory = await getApplicationDocumentsDirectory();
-    String path = directory.path + 'notes.db';
-    var noteDb = await openDatabase(path, version: 2, onCreate: _createDb);
+    /*Directory directory = await getApplicationDocumentsDirectory();
+    String path = directory.path + '/not.db';*/
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, 'demo.db');
+
+    var noteDb = await openDatabase(path, version: 2, onCreate: (Database db, int version) async {
+      await db.execute( 'CREATE TABLE Test (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
+    });
     return noteDb;
   }
+//   String DICTIONARY_TABLE_NAME = "dictionary";
+   String DICTIONARY_TABLE_CREATE =
+      "CREATE TABLE " +  "dictionary (" +
+           "id TEXT, " +
+          "key TEXT);";
 
-  void _createDb(Database db, int newVersion) async {
-    await db.execute(
-        'CREATE TABLE $noteTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT,'
-        '$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)');
+  void _createDb(Database db,int vers) async {
+   return await db.execute('CREATE TABLE $noteTable (id INTEGER PRIMARY KEY, name TEXT, value INTEGER, num REAL)');
+
+//       'CREATE TABLE $noteTable($colId INTEGER PRIMARY KEY, $colTitle TEXT,'
+//        '$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)');
   }
 
 // get all data from db
   Future<List<Map<String, dynamic>>> getNoteMapList() async {
-    Database db = await this.database;
+    Database db =  _database;
 //    var rawResult = await db.rawQuery('SELECT * FROM $noteTable order by $colPriority ASC'); // raw query
     var result = await db.query(noteTable, orderBy: 'ASC'); // normal query
     return result;
@@ -50,7 +62,7 @@ class DbHelper {
 
 // insert data in db
   Future<int> insertNote(Note note) async {
-    Database db = await this.database;
+    Database db = _database;
 //    var rawResult = await db.rawQuery('SELECT * FROM $noteTable order by $colPriority ASC');
     var result = await db.insert(noteTable, note.toMap());
     return result;
@@ -89,8 +101,9 @@ class DbHelper {
     var getNoteList = await getNoteMapList();
     int count = getNoteList.length;
     List<Note> noteLists = List<Note>();
-    for (int i = 0; i < count; i++)
+    for (int i = 0; i < count; i++) {
       noteLists.add(Note.fromMapObject(getNoteList[i]));
+    }
     return noteLists;
   }
 }

@@ -2,23 +2,42 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app/global/utils/widget_utils.dart';
+import 'package:flutter_app/view/allWidgets/all_list.dart';
 
 class MaterialWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Container(
-            child: Column(
-      children: <Widget>[
-        getImageView(),
-        textViewColor("hello", Colors.deepOrange),
-        getRiseButton(context, "click me"),
-        textViewColor("lucky number test  is - ${getLuckyNumber()}", Colors.deepOrange),
-        Expanded(
-          child: textViewColor("hi this is testing word", Colors.deepOrange),
-        )
-      ],
-    )));
+    return Scaffold(
+        appBar: AppBar(
+            title: textViewWhiteColor('all widgets'),
+            elevation: 2,
+            backgroundColor: Colors.orangeAccent,
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                navigationPop(context, AllLists());
+              },
+            )),
+        backgroundColor: Colors.white,
+        body: Center(
+            child: Container(
+                margin: EdgeInsets.only(top: 50),
+                child: Column(
+                  children: <Widget>[
+                    getImageView(),
+                    textViewColor("hello", Colors.deepOrange),
+                    getRiseButton(context, "click me"),
+                    textViewColor("lucky number test  is - ${getLuckyNumber()}",
+                        Colors.deepOrange),
+                    Expanded(
+                      child: textViewColor(
+                          "hi this is testing word", Colors.deepOrange),
+                    )
+                  ],
+                ))));
   }
 
 // show static list view
@@ -61,7 +80,6 @@ class MaterialWidget extends StatelessWidget {
     });
     return listView;
   }
-
 
 //    get user lucky numbers
   int getLuckyNumber() {
